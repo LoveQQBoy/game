@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+    <style>
+        @import url(javascript.css);
+    </style>
+
+    <script>
+        var arr1 = new Array(5); //存放隨機五個數字
+        var arr2 = new Array(); //存放使用者輸入的五個數字
+        var arr3 = new Array(); //隨機數字和使用者數字比對後共同有的數字
+        var arr2Sort = arr2.sort();
+        var hint = 0; //計算hint被按了幾次,按了奇數次顯示提示,偶數字隱藏提示
+        var time = 30000; //計時器的倒數計時
+        var time2 = 3000;  //比對數字時的倒數時間
+        var cancle;//取消倒數計時
+        var cancle2; //取消比對倒數計時
+        var start = new Date().getTime();// 比對時的delay方法
+        var end = 0;// 比對時的delay方法
+        var totalScore = 1000000; //總獎金
+
+        //隨機五個數字  
+        for (var i = 0; i < 5; i++) {
+            var random = Math.floor(Math.random() * 10);
+            //確認沒有重覆後再將值加入Array中
+            while (arr1.includes(random)) {
+                var random = Math.floor(Math.random() * 10);
+            }
+            arr1[i] = random;
+        }
+        var randomArray = arr1.sort(); //arr1進行排列
+        console.log(`${randomArray}`)
+
+        //提示按鈕
+        function clickHint() {
+            hint++;
+            if (hint % 2 == 1) {
+                document.getElementById("hintBox").value = randomArray;
+                if (hint == 1)
+                    totalScore -= 500000;
+            }
+            if (hint % 2 == 0)
+                document.getElementById("hintBox").value = "";
+        }
+
+
+        //按下數字按鈕
+        function clickZero() {
+            arr2.push(0);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("0").disabled = true;
+
+        }
+
+        function clickOne() {
+            arr2.push(1);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("1").disabled = true;
+
+        }
+
+        function clickTwo() {
+            arr2.push(2);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("2").disabled = true;
+        }
+
+        function clickThree() {
+            arr2.push(3);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("3").disabled = true;
+        }
+
+        function clickFour() {
+            arr2.push(4);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("4").disabled = true;
+        }
+
+        function clickFive() {
+            arr2.push(5);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("5").disabled = true;
+        }
+
+        function clickSix() {
+            arr2.push(6);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("6").disabled = true;
+        }
+
+        function clickSeven() {
+            arr2.push(7);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("7").disabled = true;
+        }
+
+        function clickEight() {
+            arr2.push(8);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("8").disabled = true;
+        }
+
+        function clickNine() {
+            arr2.push(9);
+            document.getElementById("answer").value = arr2.sort();
+            document.getElementById("9").disabled = true;
+        }
+
+
+        //輸入答案後比對區
+        function clickEnter() {
+            //比對隨機數字及使用者陣列內的數字，若兩者有相同數字將數字加入到陣列三
+            for (var i = 0; i <= 9; i++) {
+                if (arr1.includes(i) && arr2.includes(i)) {
+                    arr3.push(i)
+                    // console.log(`${arr3}`)
+                }
+            }
+            //比對猜中幾個數字
+            if (arr3.length != 5) {
+                document.getElementById("console").innerHTML = ("\r\r你猜中的數字為" + arr3.toString() + "\r共猜中:" + arr3.length + "個數字");
+                clickClear()
+                document.getElementById("answer").value = "" //清空answer的值
+                totalScore -= 100000;
+            }
+
+            //猜中5個數字會印出全猜中
+            else {
+                if (totalScore > 0)
+                    document.getElementById("console").innerHTML = (`\r\r恭喜妳破解成功!!!\r你偷到的錢為:` + `${totalScore}`);
+                else { document.getElementById("console").innerHTML = (`\r\r恭喜妳破解成功!!!\r你偷到的錢為:0`) }
+                inhibit();
+                clearTimeout(cancle);
+            }
+        }
+
+        //3秒過後再執行數字比對
+        function clickEnter2() {
+            if (arr2.length != 5) {
+                document.getElementById("console").innerHTML = (`\r\r請輸入5個數字`);
+                clickClear()
+            }
+
+            else {
+                if (time2 <= 0) {
+                    document.getElementById("console").innerHTML = (`0...`);
+                    inhibitCancle()
+                    clickEnter();
+                    time2 = 3000;
+                }
+                else {
+                    document.getElementById("console").innerHTML = (`\r\r比對中 ${(time2 / 1000)}...`);
+                    inhibit()
+                    cancle2 = setTimeout(clickEnter2, 1000);
+                    time2 -= 1000;
+                }
+            }
+        }
+
+        //Reset按鈕
+        function clickReset() {
+            history.go(0)
+        }
+
+        //計時器
+        function countDown() {
+            if (time <= 0) {
+                document.getElementById("time").value = ("0...");
+                document.getElementById("console").innerHTML = ("\r\r挑戰失敗，請重新開始遊戲");
+                clearTimeout(cancle2);
+                inhibit();
+
+            } else {
+                document.getElementById("time").value = ((time / 1000) + " sec...");
+                cancle = setTimeout(countDown, 1000);
+            }
+            time -= 1000;
+        }
+
+        //時間到或者5個數字都猜中後，會將元素給disabled
+        function inhibit() {
+            var inhibitButton;
+            var
+                inhibitButton = document.getElementsByTagName("button");
+            for (i = 0; i < inhibitButton.length; i++) {
+                inhibitButton[i].disabled = true;
+                document.getElementById("reset").disabled = false;
+            }
+        }
+
+        function inhibitCancle() {
+            var inhibitButton;
+            var
+                inhibitButton = document.getElementsByTagName("button");
+            for (i = 0; i < inhibitButton.length; i++) {
+                inhibitButton[i].disabled = false;
+            }
+        }
+
+        //將arr2 arr3 數字disable answer清空
+        function clickClear() {
+            while (arr2.length > 0 || arr3.length > 0) { //將array清空做下一次運算
+                arr2.pop()
+                arr3.pop()
+            }
+            for (var i = 0; i <= 9; i++) {
+                var a = i.toString();
+                document.getElementById(a).disabled = false; //將數字格disable取消
+            }
+
+            document.getElementById("answer").value = "" //清空answer的值
+        }
+
+        function init() {
+            document.getElementById("time").value = ((time / 1000) + " sec...");
+            var cancle = setTimeout(countDown, 1000);
+            time -= 1000;
+        }
+
+
+    </script>
+
+</head>
+
+<body onload="init()">
+    <div class="border1">
+        <!-- 標題 -->
+        <h1 class="title">保險箱偷錢任務</h1>
+
+        <!-- 計時器 -->
+        <div>
+            <input class="timeBox" type="text" name="time" id="time" value="" readonly>
+        </div>
+        <div class="timeBoxFont">計時器</div>
+
+        <!-- 輸入答案區塊 -->
+        <div>
+            <input class="answerBox" type="text" name="answer" id="answer" value="" readonly>
+        </div>
+
+
+        <div>
+            <button class="enter" id="enter" onclick="clickEnter2()">輸入答案</button>
+        </div>
+
+        <!-- 結果顯示區塊 -->
+        <div>
+            <textarea class="consoleBox" cols="40" row="5" id="console" value="" readonly></textarea>
+        </div>
+
+        <!-- 重啟按鈕區塊 -->
+        <div>
+            <button class="reset" id="reset" onclick="clickReset()">重啟遊戲</button>
+        </div>
+
+        <!-- 提示答案區塊 -->
+        <div>
+            <input class="hintBox" type="text" name="hintBox" id="hintBox" value="" readonly>
+        </div>
+
+        <div>
+            <button class="hint" id="hint" onclick="clickHint()">密碼提示<br />(金額扣50萬)</button>
+        </div>
+
+        <!-- 數字按鈕 -->
+        <div class="boxBorder">
+            <button class="zero" id="0" onclick="clickZero()">0</button>
+            <button class="one" id="1" onclick="clickOne()">1</button>
+            <button class="two" id="2" onclick="clickTwo()">2</button>
+            <button class="three" id="3" onclick="clickThree()">3</button>
+            <button class="four" id="4" onclick="clickFour()">4</button>
+            <button class="five" id="5" onclick="clickFive()">5</button>
+            <button class="six" id="6" onclick="clickSix()">6</button>
+            <button class="seven" id="7" onclick="clickSeven()">7</button>
+            <button class="eight" id="8" onclick="clickEight()">8</button>
+            <button class="nine" id="9" onclick="clickNine()">9</button>
+            <button class="clear" id="" onclick=""></button>
+            <button class="clear2" id="" onclick="clickClear()">清除</button>
+
+        </div>
+        <fieldset class="caption">
+            <legend class="legendFont">說明</legend>
+            <p class="pFont">你是一名小偷，你需要在30秒內點選"左側數字格"輸入5個數字破解保險箱密碼，否則保險箱會鎖死無法打開</p>
+            <p class="pFont">總金額為100萬，破解失敗一次扣10萬，使用密碼提示扣50萬</p>
+        </fieldset>
+        <div></div>
+    </div>
+
+
+
+</body>
+
+</html>

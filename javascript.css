@@ -1,0 +1,227 @@
+.border1 {
+    position: relative;
+    border: 1px solid black;
+    width: 1000px;
+    height: 600px;
+    margin: 150px auto;
+
+}
+
+.title {
+    position: absolute;
+    top: -100px;
+    left: 350px;
+}
+
+.boxBorder {
+    position: absolute;
+    border: 1px solid black;
+    width: 300px;
+    height: 500px;
+    top: 50px;
+    left: 50px;
+}
+
+.timeBox {
+    position: absolute;
+    border: 1px solid black;
+    width: 80px;
+    height: 30px;
+    top: 50px;
+    left: 600px;
+    text-align: center;
+}
+
+.timeBoxFont {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    top: 15px;
+    left: 600px;
+    text-align: center;
+}
+
+.answerBox {
+    position: absolute;
+    border: 1px solid black;
+    width: 300px;
+    height: 100px;
+    top: 150px;
+    left: 500px;
+    text-align: center;
+}
+
+.enter {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    top: 150px;
+    left: 850px;
+}
+
+.consoleBox {
+    position: absolute;
+    border: 1px solid black;
+    width: 300px;
+    height: 100px;
+    top: 300px;
+    left: 500px;
+    text-align: center;
+}
+
+.hintBox {
+    position: absolute;
+    border: 1px solid black;
+    width: 200px;
+    height: 80px;
+    top: 450px;
+    left: 500px;
+    text-align: center;
+}
+
+.hint {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 80px;
+    top: 450px;
+    left: 750px;
+}
+
+.zero {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 0px;
+    left: 100px;
+}
+
+.one {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 125px;
+    left: 0px;
+}
+
+.two {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 125px;
+    left: 100px;
+}
+
+.three {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 125px;
+    left: 200px;
+}
+
+.four {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 250px;
+    left: 0px;
+}
+
+.five {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 250px;
+    left: 100px;
+}
+
+.six {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 250px;
+    left: 200px;
+}
+
+.seven {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 375px;
+    left: 0px;
+}
+
+.eight {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 375px;
+    left: 100px;
+}
+
+.nine {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 375px;
+    left: 200px;
+}
+
+.clear {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.clear2 {
+    position: absolute;
+    border: 1px solid black;
+    width: 100px;
+    height: 125px;
+    bottom: 0px;
+    left: 200px;
+}
+
+
+
+.reset {
+    position: absolute;
+    border: 1px solid black;
+    width: 130px;
+    height: 130px;
+    top: 50px;
+    left: 1050px;
+}
+
+.caption {
+    position: absolute;
+    width: 1300px;
+    height: 150px;
+    top: 650px;
+    left: -150px;
+
+}
+
+.legendFont {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.pFont {
+    text-align: center;
+}
